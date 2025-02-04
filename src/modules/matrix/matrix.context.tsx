@@ -19,6 +19,7 @@ type MatrixContextProps = {
   ) => void;
   findNearestCells: (rowIndex: number, colIndex: number) => void;
   removeRow: (rowIndex: number) => void;
+  addRow: () => void;
 };
 
 export const MatrixContext = React.createContext<MatrixContextProps | null>(

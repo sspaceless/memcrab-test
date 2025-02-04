@@ -1,8 +1,13 @@
 import React from "react";
 
-import { generateMatrix, getNearestCellsSet } from "./lib/utils";
+import {
+  generateMatrix,
+  generateRandomCellValue,
+  generateUniqueId,
+  getNearestCellsSet,
+} from "./lib/utils";
 import { MatrixContext } from "./matrix.context";
-import { Matrix } from "./types/matrix.type";
+import { Cell, Matrix } from "./types/matrix.type";
 
 export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
   children,
@@ -79,6 +84,18 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
     });
   };
 
+  const addRow = () => {
+    const newRow: Cell[] = Array.from({ length: matrix[0]?.length }, () => ({
+      id: generateUniqueId(),
+      amount: generateRandomCellValue(),
+    }));
+
+    setMatrix((prevMatrix) => {
+      const updatedMatrix = [...prevMatrix, newRow];
+      return updatedMatrix;
+    });
+  };
+
   return (
     <MatrixContext.Provider
       value={{
@@ -95,6 +112,7 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
         increaseCellValue,
         findNearestCells,
         removeRow,
+        addRow,
       }}
     >
       {children}

@@ -6,7 +6,11 @@ import { MatrixRow } from "./components/matrix-row.component";
 import { useMatrix } from "./matrix.hook";
 
 export const Matrix: React.FC = () => {
-  const { matrix, n } = useMatrix();
+  const { matrix, addRow } = useMatrix();
+
+  const handleAddRowButtonClick = () => {
+    addRow();
+  };
 
   const rows = matrix.map((row, rowIndex) => (
     <MatrixRow key={rowIndex} rowIndex={rowIndex} row={row} />
@@ -16,9 +20,10 @@ export const Matrix: React.FC = () => {
     <div>
       <table className="border">
         <tbody>
-          <MatrixHead n={n} />
+          <MatrixHead />
           {rows}
           <MatrixColMedian />
+          <button onClick={handleAddRowButtonClick}>+</button>
         </tbody>
       </table>
     </div>

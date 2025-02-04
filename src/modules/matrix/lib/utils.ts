@@ -1,12 +1,19 @@
 import { Cell, Matrix } from "../types/matrix.type";
 
-export const generateMatrix = (m: number, n: number): Cell[][] => {
-  return Array.from({ length: m }, (_, rowIndex) =>
-    Array.from({ length: n }, (_, colIndex) => ({
-      id: rowIndex * n + colIndex,
-      amount: Math.floor(Math.random() * 9) + 1,
+export const generateUniqueId = () => {
+  return Date.now() + Math.floor(Math.random() * 1000);
+};
 
-      // amount: Math.floor(Math.random() * 900) + 100,
+export const generateRandomCellValue = () => {
+  return Math.floor(Math.random() * 9) + 1;
+  // amount: Math.floor(Math.random() * 900) + 100,
+};
+
+export const generateMatrix = (m: number, n: number): Cell[][] => {
+  return Array.from({ length: m }, () =>
+    Array.from({ length: n }, () => ({
+      id: generateUniqueId(),
+      amount: generateRandomCellValue(),
     }))
   );
 };

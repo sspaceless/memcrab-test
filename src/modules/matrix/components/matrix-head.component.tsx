@@ -1,8 +1,10 @@
-type MatrixHeadProps = {
-  n: number;
-};
+import { useMatrix } from "../matrix.hook";
 
-export const MatrixHead: React.FC<MatrixHeadProps> = ({ n }) => {
+export const MatrixHead: React.FC = () => {
+  const { matrix } = useMatrix();
+
+  const n = matrix[0]?.length ?? 0;
+
   return (
     <tr>
       <td></td>
