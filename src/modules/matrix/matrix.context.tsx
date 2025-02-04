@@ -3,7 +3,11 @@ import { Matrix } from "./types/matrix.type";
 
 type MatrixContextProps = {
   matrix: Matrix;
-  setMatrix: React.Dispatch<React.SetStateAction<Matrix>>;
+  updateMatrix: (matrix: Matrix) => void;
+  increaseCellValue: (
+    targetRowIndex: number,
+    targetColumnIndex: number
+  ) => void;
 };
 
 export const MatrixContext = React.createContext<MatrixContextProps | null>(

@@ -11,12 +11,12 @@ type MatrixProps = {
 };
 
 export const Matrix: React.FC<MatrixProps> = ({ m, n }) => {
-  const { matrix, setMatrix } = useMatrix();
+  const { matrix, updateMatrix } = useMatrix();
 
   React.useEffect(() => {
     const initialMatrix = generateMatrix(m, n);
-    setMatrix(initialMatrix);
-  }, [m, n, setMatrix]);
+    updateMatrix(initialMatrix);
+  }, [m, n]);
 
   const rows = matrix.map((row, rowIndex) => (
     <MatrixRow key={rowIndex} rowIndex={rowIndex} row={row} />
