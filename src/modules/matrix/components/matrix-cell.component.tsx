@@ -75,8 +75,8 @@ export const MatrixCell: React.FC<MatrixCellProps> = ({
   return (
     <td
       className={cn(
-        "border select-none text-center align-middle hover:bg-green-300",
-        nearestCells.has(cell.id) && "bg-yellow-300"
+        "border select-none text-center align-middle hover:!bg-green-300",
+        nearestCells.has(cell.id) && "!bg-yellow-300"
       )}
       style={{
         backgroundColor: getCellBackgroundColor(

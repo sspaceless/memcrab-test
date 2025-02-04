@@ -72,6 +72,13 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
     setNearestCells(getNearestCellsSet(matrix, targetValue, x));
   };
 
+  const removeRow = (rowIndex: number) => {
+    setMatrix((prevMatrix) => {
+      const updatedMatrix = prevMatrix.filter((_, index) => index !== rowIndex);
+      return updatedMatrix;
+    });
+  };
+
   return (
     <MatrixContext.Provider
       value={{
@@ -87,6 +94,7 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
         updateNearestCells,
         increaseCellValue,
         findNearestCells,
+        removeRow,
       }}
     >
       {children}

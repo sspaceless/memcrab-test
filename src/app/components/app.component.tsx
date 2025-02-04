@@ -4,7 +4,10 @@ import { Matrix } from "~/modules/matrix/matrix.component";
 import { useMatrix } from "~/modules/matrix/matrix.hook";
 
 const App: React.FC = () => {
-  const { m, n, x, updateM, updateN, updateX } = useMatrix();
+  const { matrix, x, updateM, updateN, updateX } = useMatrix();
+
+  const m = matrix.length;
+  const n = matrix[0].length;
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -36,7 +39,7 @@ const App: React.FC = () => {
             id="m"
             type="number"
             className="border rounded-lg px-1 text-center ml-1"
-            value={m}
+            value={matrix.length}
             onChange={(event) => handleInputChange(event, 0, 100, updateM)}
           />
         </label>
@@ -46,7 +49,7 @@ const App: React.FC = () => {
             id="n"
             type="number"
             className="border rounded-lg px-1 text-center ml-1"
-            value={n}
+            value={matrix[0].length}
             onChange={(event) => handleInputChange(event, 0, 100, updateN)}
           />
         </label>

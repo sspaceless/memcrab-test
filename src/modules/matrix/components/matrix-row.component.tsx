@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useMatrix } from "../matrix.hook";
 import { Cell } from "../types/matrix.type";
 import { CellViewMode, MatrixCell } from "./matrix-cell.component";
 
@@ -9,12 +10,18 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
   const [cellViewMode, setCellViewMode] =
     React.useState<CellViewMode>("number");
 
+  const { removeRow } = useMatrix();
+
   const handleSumCellMouseEnter = () => {
     setCellViewMode("percent");
   };
 
   const handleSumCellMouseLeave = () => {
     setCellViewMode("number");
+  };
+
+  const handleRemoveRowButtonClick = () => {
+    removeRow(rowIndex);
   };
 
   const rowSum = row.reduce((sum, currentRow) => sum + currentRow.amount, 0);
@@ -41,6 +48,8 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
       >
         {rowSum}
       </td>
+
+      <button onClick={handleRemoveRowButtonClick}>X</button>
     </tr>
   );
 };
