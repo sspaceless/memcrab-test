@@ -5,11 +5,36 @@ import { cn } from "~/shared/lib/utils";
 import { useMatrix } from "../matrix.hook";
 import { Cell } from "../types/matrix.type";
 
-export const MatrixCell: React.FC<{
+export type CellViewMode = "number" | "percent";
+
+type MatrixCellProps = {
   rowIndex: number;
   colIndex: number;
   cell: Cell;
-}> = ({ rowIndex, colIndex, cell }) => {
+  viewMode: CellViewMode;
+  rowSum: number;
+};
+
+const renderCellContent = (
+  viewMode: CellViewMode,
+  amount: number,
+  rowSum: number
+) => {
+  switch (viewMode) {
+    case "number":
+      return amount;
+    case "percent":
+      return `${Math.round((amount * 100) / rowSum)}%`;
+  }
+};
+
+export const MatrixCell: React.FC<MatrixCellProps> = ({
+  viewMode,
+  rowIndex,
+  colIndex,
+  rowSum,
+  cell,
+}) => {
   const {
     nearestCells,
     increaseCellValue,
@@ -39,7 +64,7 @@ export const MatrixCell: React.FC<{
       onMouseLeave={handleMouseLeave}
       onClick={handleCellClick}
     >
-      {cell.amount}
+      {renderCellContent(viewMode, cell.amount, rowSum)}
     </td>
   );
 };

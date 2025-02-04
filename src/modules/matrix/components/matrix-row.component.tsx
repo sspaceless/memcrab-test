@@ -1,13 +1,23 @@
 import React from "react";
 
 import { Cell } from "../types/matrix.type";
-import { MatrixCell } from "./matrix-cell.component";
+import { CellViewMode, MatrixCell } from "./matrix-cell.component";
 
-export const MatrixRow: React.FC<{ rowIndex: number; row: Cell[] }> = ({
-  rowIndex,
-  row,
-}) => {
+type MatrixRowProps = { rowIndex: number; row: Cell[] };
+
+export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
+  const [cellViewMode, setCellViewMode] =
+    React.useState<CellViewMode>("number");
+
   const rowSum = row.reduce((sum, currentRow) => sum + currentRow.amount, 0);
+
+  const handleSumCellMouseEnter = () => {
+    setCellViewMode("percent");
+  };
+
+  const handleSumCellMouseLeave = () => {
+    setCellViewMode("number");
+  };
 
   return (
     <tr className="border">
@@ -18,9 +28,17 @@ export const MatrixRow: React.FC<{ rowIndex: number; row: Cell[] }> = ({
           rowIndex={rowIndex}
           colIndex={colIndex}
           cell={cell}
+          viewMode={cellViewMode}
+          rowSum={rowSum}
         />
       ))}
-      <td className="border select-none  text-center align-middle">{rowSum}</td>
+      <td
+        className="border select-none  text-center align-middle"
+        onMouseEnter={handleSumCellMouseEnter}
+        onMouseLeave={handleSumCellMouseLeave}
+      >
+        {rowSum}
+      </td>
     </tr>
   );
 };
