@@ -9,8 +9,6 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
   const [cellViewMode, setCellViewMode] =
     React.useState<CellViewMode>("number");
 
-  const rowSum = row.reduce((sum, currentRow) => sum + currentRow.amount, 0);
-
   const handleSumCellMouseEnter = () => {
     setCellViewMode("percent");
   };
@@ -18,6 +16,9 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
   const handleSumCellMouseLeave = () => {
     setCellViewMode("number");
   };
+
+  const rowSum = row.reduce((sum, currentRow) => sum + currentRow.amount, 0);
+  const maxRowValue = Math.max(...row.map((cell) => cell.amount));
 
   return (
     <tr className="border">
@@ -30,6 +31,7 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
           cell={cell}
           viewMode={cellViewMode}
           rowSum={rowSum}
+          maxRowValue={maxRowValue}
         />
       ))}
       <td

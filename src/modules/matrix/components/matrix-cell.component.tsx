@@ -5,6 +5,35 @@ import { cn } from "~/shared/lib/utils";
 import { useMatrix } from "../matrix.hook";
 import { Cell } from "../types/matrix.type";
 
+const renderCellContent = (
+  viewMode: CellViewMode,
+  amount: number,
+  rowSum: number
+) => {
+  const percent = rowSum > 0 ? (amount * 100) / rowSum : 0;
+
+  switch (viewMode) {
+    case "number":
+      return amount;
+    case "percent":
+      return `${Math.round(percent)}%`;
+  }
+};
+
+const getCellBackgroundColor = (
+  viewMode: CellViewMode,
+  cellValue: number,
+  maxRowValue: number
+): string => {
+  if (viewMode === "number") {
+    return "white";
+  }
+
+  const percentage = maxRowValue > 0 ? (cellValue / maxRowValue) * 100 : 0;
+  const intensity = Math.round((percentage / 100) * 255);
+  return `rgb(255, ${255 - intensity}, 0)`;
+};
+
 export type CellViewMode = "number" | "percent";
 
 type MatrixCellProps = {
@@ -13,19 +42,7 @@ type MatrixCellProps = {
   cell: Cell;
   viewMode: CellViewMode;
   rowSum: number;
-};
-
-const renderCellContent = (
-  viewMode: CellViewMode,
-  amount: number,
-  rowSum: number
-) => {
-  switch (viewMode) {
-    case "number":
-      return amount;
-    case "percent":
-      return `${Math.round((amount * 100) / rowSum)}%`;
-  }
+  maxRowValue: number;
 };
 
 export const MatrixCell: React.FC<MatrixCellProps> = ({
@@ -33,6 +50,7 @@ export const MatrixCell: React.FC<MatrixCellProps> = ({
   rowIndex,
   colIndex,
   rowSum,
+  maxRowValue,
   cell,
 }) => {
   const {
@@ -60,6 +78,13 @@ export const MatrixCell: React.FC<MatrixCellProps> = ({
         "border select-none text-center align-middle hover:bg-green-300",
         nearestCells.has(cell.id) && "bg-yellow-300"
       )}
+      style={{
+        backgroundColor: getCellBackgroundColor(
+          viewMode,
+          cell.amount,
+          maxRowValue
+        ),
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleCellClick}
