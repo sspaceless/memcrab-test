@@ -1,22 +1,12 @@
 import React from "react";
-import { MatrixRow } from "./components/matrix-row.component";
-import { useMatrix } from "./matrix.hook";
-import { generateMatrix } from "./lib/utils";
+
 import { MatrixColMedian } from "./components/matrix-col-median.component";
 import { MatrixHead } from "./components/matrix-head.component";
+import { MatrixRow } from "./components/matrix-row.component";
+import { useMatrix } from "./matrix.hook";
 
-type MatrixProps = {
-  m: number;
-  n: number;
-};
-
-export const Matrix: React.FC<MatrixProps> = ({ m, n }) => {
-  const { matrix, updateMatrix } = useMatrix();
-
-  React.useEffect(() => {
-    const initialMatrix = generateMatrix(m, n);
-    updateMatrix(initialMatrix);
-  }, [m, n]);
+export const Matrix: React.FC = () => {
+  const { matrix, n } = useMatrix();
 
   const rows = matrix.map((row, rowIndex) => (
     <MatrixRow key={rowIndex} rowIndex={rowIndex} row={row} />

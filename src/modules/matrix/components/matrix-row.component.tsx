@@ -1,6 +1,7 @@
 import React from "react";
-import { MatrixCell } from "./matrix-cell.component";
+
 import { Cell } from "../types/matrix.type";
+import { MatrixCell } from "./matrix-cell.component";
 
 export const MatrixRow: React.FC<{ rowIndex: number; row: Cell[] }> = ({
   rowIndex,

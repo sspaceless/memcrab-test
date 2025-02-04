@@ -1,4 +1,5 @@
 import React from "react";
+
 import { MatrixContext } from "./matrix.context";
 
 export const useMatrix = () => {

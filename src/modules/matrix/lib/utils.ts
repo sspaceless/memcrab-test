@@ -1,4 +1,4 @@
-import { Cell } from "../types/matrix.type";
+import { Cell, Matrix } from "../types/matrix.type";
 
 export const generateMatrix = (m: number, n: number): Cell[][] => {
   return Array.from({ length: m }, (_, rowIndex) =>
@@ -35,4 +35,26 @@ export const calculate50thPercentile = (matrix: Cell[][]): number[] => {
   }
 
   return percentiles;
+};
+
+export const getNearestCellsSet = (
+  matrix: Matrix,
+  targetValue: number,
+  x: number
+) => {
+  const allCells = matrix.flatMap((row, rowIndex) =>
+    row.map((cell, columnIndex) => ({
+      id: cell.id,
+      amount: cell.amount,
+      rowIndex,
+      columnIndex,
+      difference: Math.abs(cell.amount - targetValue),
+    }))
+  );
+
+  const nearestCells = allCells
+    .sort((a, b) => a.difference - b.difference)
+    .slice(0, x);
+
+  return new Set(nearestCells.map((cell) => cell.id));
 };

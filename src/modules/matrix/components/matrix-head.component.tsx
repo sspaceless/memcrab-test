@@ -1,6 +1,7 @@
 type MatrixHeadProps = {
   n: number;
 };
+
 export const MatrixHead: React.FC<MatrixHeadProps> = ({ n }) => {
   return (
     <tr>

@@ -1,14 +1,49 @@
 import React from "react";
+
+import { generateMatrix, getNearestCellsSet } from "./lib/utils";
 import { MatrixContext } from "./matrix.context";
 import { Matrix } from "./types/matrix.type";
 
 export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
+  const [m, setM] = React.useState(2);
+  const [n, setN] = React.useState(2);
+  const [x, setX] = React.useState(0);
   const [matrix, setMatrix] = React.useState<Matrix>([]);
+  const [nearestCells, setNearestCells] = React.useState<Set<number>>(
+    new Set()
+  );
+
+  React.useEffect(() => {
+    const initialMatrix = generateMatrix(m, n);
+    updateMatrix(initialMatrix);
+  }, [m, n]);
+
+  React.useEffect(() => {
+    if (x > m * n) {
+      updateX(m * n);
+    }
+  }, [m, n, x]);
 
   const updateMatrix = (value: Matrix) => {
     setMatrix(value);
+  };
+
+  const updateNearestCells = (value: Set<number>) => {
+    setNearestCells(value);
+  };
+
+  const updateM = (value: number) => {
+    setM(value);
+  };
+
+  const updateN = (value: number) => {
+    setN(value);
+  };
+
+  const updateX = (value: number) => {
+    setX(value);
   };
 
   const increaseCellValue = (
@@ -32,12 +67,26 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
     });
   };
 
+  const findNearestCells = (rowIndex: number, columnIndex: number) => {
+    const targetValue = matrix[rowIndex][columnIndex].amount;
+    setNearestCells(getNearestCellsSet(matrix, targetValue, x));
+  };
+
   return (
     <MatrixContext.Provider
       value={{
+        m,
+        n,
+        x,
         matrix,
+        nearestCells,
+        updateM,
+        updateN,
+        updateX,
         updateMatrix,
+        updateNearestCells,
         increaseCellValue,
+        findNearestCells,
       }}
     >
       {children}
