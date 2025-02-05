@@ -2,7 +2,7 @@ name: 🔐 SSH Deploy to VPS and Pull Image
 
 on:
   workflow_run:
-    workflows: ["📦 Push"]
+    workflows: ["📦 Push main"]
     types:
       - completed
 jobs:
