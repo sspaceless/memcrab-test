@@ -1,6 +1,6 @@
 ## [Memcrab](https://memcrab.com/) Test
 
-Demo already available at [memcrab.spaceless.lol](https://memcrab.spaceless.lol)
+Demo already available at [memcrab.spaceless.lol](http://memcrab.spaceless.lol)
 
 ### Technologies:
 
