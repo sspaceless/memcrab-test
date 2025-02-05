@@ -43,13 +43,16 @@ jobs:
             type=sha
             type=semver,pattern={{version}}
 
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v5
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v4
         with:
-          context: .
-          push: true
+          context: "{{defaultContext}}:./"
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Output Image Tags
         run: |
