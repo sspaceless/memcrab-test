@@ -1,7 +1,7 @@
 import { Cell, Matrix } from "../types/matrix.type";
 
-export const generateUniqueId = () => {
-  return Date.now() + Math.floor(Math.random() * 1000);
+export const generateUniqueId = (rowIndex: number, colIndex: number) => {
+  return rowIndex * 1000 + colIndex;
 };
 
 export const generateRandomCellValue = () => {
@@ -10,11 +10,11 @@ export const generateRandomCellValue = () => {
 };
 
 export const generateMatrix = (m: number, n: number): Cell[][] => {
-  return Array.from({ length: m }, () =>
-    Array.from({ length: n }, () => ({
-      id: generateUniqueId(),
+  return Array.from({ length: m }, (_, rowIndex) =>
+    Array.from({ length: n }, (_, colIndex) => ({
+      id: generateUniqueId(rowIndex, colIndex),
       amount: generateRandomCellValue(),
-    }))
+    })),
   );
 };
 
@@ -47,7 +47,7 @@ export const calculate50thPercentile = (matrix: Cell[][]): number[] => {
 export const getNearestCellsSet = (
   matrix: Matrix,
   targetValue: number,
-  x: number
+  x: number,
 ) => {
   const allCells = matrix.flatMap((row, rowIndex) =>
     row.map((cell, columnIndex) => ({
@@ -56,7 +56,7 @@ export const getNearestCellsSet = (
       rowIndex,
       columnIndex,
       difference: Math.abs(cell.amount - targetValue),
-    }))
+    })),
   );
 
   const nearestCells = allCells

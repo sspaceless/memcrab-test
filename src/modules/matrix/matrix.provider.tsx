@@ -17,7 +17,7 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
   const [x, setX] = React.useState(0);
   const [matrix, setMatrix] = React.useState<Matrix>([]);
   const [nearestCells, setNearestCells] = React.useState<Set<number>>(
-    new Set()
+    new Set(),
   );
 
   React.useEffect(() => {
@@ -53,7 +53,7 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
 
   const increaseCellValue = (
     targetRowIndex: number,
-    targetColumnIndex: number
+    targetColumnIndex: number,
   ) => {
     setMatrix((previousMatrix) => {
       return previousMatrix.map((row, currentRowIndex) => {
@@ -85,10 +85,13 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
   };
 
   const addRow = () => {
-    const newRow: Cell[] = Array.from({ length: matrix[0]?.length }, () => ({
-      id: generateUniqueId(),
-      amount: generateRandomCellValue(),
-    }));
+    const newRow: Cell[] = Array.from(
+      { length: matrix[0]?.length },
+      (_, colIndex) => ({
+        id: generateUniqueId(matrix?.length, colIndex),
+        amount: generateRandomCellValue(),
+      }),
+    );
 
     setMatrix((prevMatrix) => {
       const updatedMatrix = [...prevMatrix, newRow];
