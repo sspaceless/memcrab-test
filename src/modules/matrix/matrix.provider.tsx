@@ -20,14 +20,14 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
     new Set(),
   );
 
-  const regenerateMatrix = React.useCallback(() => {
+  const regenerateMatrix = (m: number, n: number) => {
     const initialMatrix = generateMatrix(m, n);
     updateMatrix(initialMatrix);
-  }, [m, n]);
+  };
 
   React.useEffect(() => {
-    regenerateMatrix();
-  }, [regenerateMatrix]);
+    regenerateMatrix(m, n);
+  }, []);
 
   React.useEffect(() => {
     if (x > m * n) {
@@ -45,12 +45,12 @@ export const MatrixProvider: React.FC<React.PropsWithChildren> = ({
 
   const updateM = (value: number) => {
     setM(value);
-    regenerateMatrix();
+    regenerateMatrix(value, n);
   };
 
   const updateN = (value: number) => {
     setN(value);
-    regenerateMatrix();
+    regenerateMatrix(m, value);
   };
 
   const updateX = (value: number) => {
