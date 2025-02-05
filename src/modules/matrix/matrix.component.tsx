@@ -1,5 +1,7 @@
 import React from "react";
 
+import IconAdd from "~/shared/ui/icons/icon-add.svg?react";
+
 import { MatrixColMedian } from "./components/matrix-col-median.component";
 import { MatrixHead } from "./components/matrix-head.component";
 import { MatrixRow } from "./components/matrix-row.component";
@@ -18,14 +20,21 @@ export const Matrix: React.FC = () => {
 
   return (
     <div>
-      <table className="border">
+      <table>
         <tbody>
           <MatrixHead />
           {rows}
           <MatrixColMedian />
-          <button onClick={handleAddRowButtonClick}>+</button>
         </tbody>
       </table>
+      <div className="flex w-full">
+        <button
+          className="mx-auto rounded-full text-slate-200 shadow transition-all duration-200 hover:text-slate-400 hover:shadow-md"
+          onClick={handleAddRowButtonClick}
+        >
+          <IconAdd />
+        </button>
+      </div>
     </div>
   );
 };

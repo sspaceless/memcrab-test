@@ -1,5 +1,8 @@
 import React from "react";
 
+import { cn } from "~/shared/lib/utils";
+import IconDeleteLeft from "~/shared/ui/icons/icon-delete-left.svg?react";
+
 import { useMatrix } from "../matrix.hook";
 import { Cell } from "../types/matrix.type";
 import { CellViewMode, MatrixCell } from "./matrix-cell.component";
@@ -28,8 +31,10 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
   const maxRowValue = Math.max(...row.map((cell) => cell.amount));
 
   return (
-    <tr className="border">
-      <td className="px-2"> M = {rowIndex + 1}</td>
+    <tr>
+      <td className="border-r border-slate-400 px-2 text-end text-sm">
+        M = {rowIndex + 1}
+      </td>
       {row.map((cell, colIndex) => (
         <MatrixCell
           key={cell.id}
@@ -42,14 +47,29 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
         />
       ))}
       <td
-        className="border text-center align-middle select-none"
+        className="group border-l border-slate-400 p-1 select-none"
         onMouseEnter={handleSumCellMouseEnter}
         onMouseLeave={handleSumCellMouseLeave}
       >
-        {rowSum}
+        <div
+          className={cn(
+            "ease flex aspect-square items-center justify-center rounded transition-all duration-200",
+            "group-hover:shadow group-hover:hover:!bg-slate-200",
+          )}
+        >
+          {rowSum}
+        </div>
       </td>
-
-      <button onClick={handleRemoveRowButtonClick}>X</button>
+      <td>
+        <div className="flex h-full items-center justify-center">
+          <button
+            className="my-auto cursor-pointer text-slate-200 transition-all duration-200 hover:text-slate-400"
+            onClick={handleRemoveRowButtonClick}
+          >
+            <IconDeleteLeft />
+          </button>
+        </div>
+      </td>
     </tr>
   );
 };
