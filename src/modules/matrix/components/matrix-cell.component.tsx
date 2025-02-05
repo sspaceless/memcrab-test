@@ -82,7 +82,7 @@ export const MatrixCell: React.FC<MatrixCellProps> = ({
 
   return (
     <td
-      className={cn("group p-1 select-none")}
+      className={cn("group min-w-[50px] p-1 select-none")}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleCellClick}

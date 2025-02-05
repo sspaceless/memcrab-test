@@ -19,8 +19,8 @@ export const Matrix: React.FC = () => {
   ));
 
   return (
-    <div>
-      <table>
+    <div className="w-full overflow-auto p-8">
+      <table className="m-auto">
         <tbody>
           <MatrixHead />
           {rows}
@@ -29,7 +29,7 @@ export const Matrix: React.FC = () => {
       </table>
       <div className="flex w-full">
         <button
-          className="mx-auto rounded-full text-slate-200 shadow transition-all duration-200 hover:text-slate-400 hover:shadow-md"
+          className="mx-auto rounded-full text-slate-400 shadow transition-all duration-200 hover:text-slate-500 hover:shadow-md"
           onClick={handleAddRowButtonClick}
         >
           <IconAdd />

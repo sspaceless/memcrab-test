@@ -5,8 +5,7 @@ export const generateUniqueId = (rowIndex: number, colIndex: number) => {
 };
 
 export const generateRandomCellValue = () => {
-  return Math.floor(Math.random() * 9) + 1;
-  // amount: Math.floor(Math.random() * 900) + 100,
+  return Math.floor(Math.random() * 900) + 100;
 };
 
 export const generateMatrix = (m: number, n: number): Cell[][] => {
