@@ -29,9 +29,9 @@ export const Form: React.FC = () => {
 
   const m = matrix?.length ?? 0;
   const n = matrix[0]?.length ?? 0;
-
+  //translate-x-[85%]
   return (
-    <div className="group absolute top-4 right-0 z-10 flex translate-x-[85%] flex-row gap-4 rounded-l-lg border border-slate-400 bg-white p-6 pl-2 shadow-md transition-all duration-300 hover:translate-x-0">
+    <div className="group absolute top-4 right-0 z-10 flex flex-row gap-4 rounded-l-lg border border-slate-400 bg-white p-6 pl-2 shadow-md transition-all duration-300 hover:translate-x-0">
       <div className="my-auto rotate-180 text-slate-400 transition-all duration-400 group-hover:rotate-0">
         <IconChevronLeft />
       </div>
