@@ -42,6 +42,7 @@ export const Form: React.FC = () => {
           type="number"
           value={m}
           onChange={(event) => handleInputChange(event, 0, 100, updateM)}
+          helperText={`Min: ${0} Max: ${100}`}
         />
 
         <TextField
@@ -50,6 +51,7 @@ export const Form: React.FC = () => {
           type="number"
           value={n}
           onChange={(event) => handleInputChange(event, 0, 100, updateN)}
+          helperText={`Min: ${0} Max: ${100}`}
         />
 
         <TextField
@@ -58,6 +60,7 @@ export const Form: React.FC = () => {
           type="number"
           value={x}
           onChange={(event) => handleInputChange(event, 0, m * n, updateX)}
+          helperText={`Min: ${0} Max: ${m * n}`}
         />
       </div>
     </div>
