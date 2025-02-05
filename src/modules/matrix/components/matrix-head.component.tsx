@@ -7,7 +7,7 @@ export const MatrixHead: React.FC = () => {
 
   return (
     <tr>
-      <td></td>
+      <td />
       {[...Array(n)].map((_, index) => (
         <td key={index} className="border px-2">
           N = {index + 1}

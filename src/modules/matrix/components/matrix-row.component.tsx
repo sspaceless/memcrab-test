@@ -42,7 +42,7 @@ export const MatrixRow: React.FC<MatrixRowProps> = ({ rowIndex, row }) => {
         />
       ))}
       <td
-        className="border select-none  text-center align-middle"
+        className="border text-center align-middle select-none"
         onMouseEnter={handleSumCellMouseEnter}
         onMouseLeave={handleSumCellMouseLeave}
       >
