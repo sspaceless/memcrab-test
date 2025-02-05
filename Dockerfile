@@ -8,7 +8,7 @@ RUN corepack enable
 WORKDIR /app
 COPY . /app
 
-RUN pnpm install
+RUN pnpm install --prod
 RUN pnpm run build
 
 FROM nginx:alpine

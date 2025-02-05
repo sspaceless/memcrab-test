@@ -1,13 +1,13 @@
 ## [Memcrab](https://memcrab.com/) Test
 
-Demo already available at [memcrab.spaceless.me](https://memcrab.spaceless.me)
+Demo already available at [memcrab.spaceless.lol](https://memcrab.spaceless.lol)
 
 ### Technologies:
 
 - [TypesScript](https://www.typescriptlang.org/)
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
-- [Tailwind Css](https://tailwindcss.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ### Run locally:
 
