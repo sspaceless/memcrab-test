@@ -1,4 +1,4 @@
-name: 🔥 ↪️ [main] Pull Request
+name: 🔥 ↪️ Pull Request [main]
 
 concurrency:
   group: "pull-main-${{ github.ref_name }}"

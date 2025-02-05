@@ -1,4 +1,4 @@
-name: 📦 [main] Push
+name: 📦 Push [main]
 
 concurrency:
   group: "push-main-${{ github.ref_name }}"
